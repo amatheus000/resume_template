@@ -1,5 +1,5 @@
 const data = {
-  name 'Alexis Matheus',
+  name: 'Alexis Matheus',
   mainEmoji:{
     character: '👋',
     ariaLabel: 'wave',
@@ -25,7 +25,7 @@ const data = {
   details: [
     "Conducted a market study on Electric Vehicles and charging stations infrastructure on the top 5 US states in the energy sector",
     "Researched on policies, regulations and competitors regarding Electric Vehicles and charging stations",
-    "Analzed the collected data to identify and prioritize promising market opportunitie"},
+    "Analzed the collected data to identify and prioritize promising market opportunitie"]},
   
     {  emoji: "⚡",
     jobTitle: "Mechanical Engineer ",
@@ -33,7 +33,7 @@ const data = {
     dates: "2017 - 2017", // end with "present" for your current job
     details: [
       "Designed the exhaust and fuel system for the generator. Analyzed the fluids mechanics and piping system with Epanet to guarantee engineering and safety standards",
-      "Designed the HVAC system of the Data Storage facilities. Conducted heat analysis, designed the piping system in CAD and selected the required equipment"},
+      "Designed the HVAC system of the Data Storage facilities. Conducted heat analysis, designed the piping system in CAD and selected the required equipment"]},
 
       {  emoji: "⚙️",
       jobTitle: "Mechanical Engineer Intern ",
@@ -41,7 +41,7 @@ const data = {
       dates: "2016 - 2016", // end with "present" for your current job
       details: [
         "Created an automatized dimensioning tool capable of recreating dam gates subject to hydrostatic and seismic loads",
-        "Validated the tool using ANSYS’ finite element analysis tested on previously developed gates"},
+        "Validated the tool using ANSYS’ finite element analysis tested on previously developed gates"]},
 
 ],  
   educationalExperiences: [{
@@ -80,19 +80,18 @@ const data = {
 ],
 };
 
-document.title =data.name;
+document.title = data.name;
 
-const name = document .querySelector(#'name');
+const name = document.querySelector('#name');
 
-name.textContect =data.name
+name.textContent = data.name
 
 const emojiContainer = document.querySelector('h1 span[role="img"]');
-
 emojiContainer.textContent = data.mainEmoji.character;
+emojiContainer.setAttribute('aria-label', data.mainEmoji.ariaLabel);
 
 const phoneNumberContainer = document.querySelector('#phone-number');
 phoneNumberContainer.textContent = data.phoneNumber;
 
 const emailContainer = document.querySelector('#email');
-emailContainer = document.querySelector()
 
