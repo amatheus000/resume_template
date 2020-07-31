@@ -9,7 +9,7 @@ const data = {
   githubHandle: 'amatheus000',
   linkedInHandle: 'alexis-matheus',
   
-  workExperiences: [{ 🍔 emoji: "",
+  workExperiences: [{ emoji: "🍔",
   jobTitle: "Operations Manager, R&D",
   institution: "Burger King Corporate",
   dates: "2019 - Present", // end with "present" for your current job
@@ -69,7 +69,7 @@ const data = {
 
   {
     emoji: "🇫🇷",
-    university: "🇫🇷",
+    university: "UTC",
     school: "Engineering School",
     dates: "2015 - 2016",
     details: [
