@@ -86,11 +86,12 @@ const name = document.querySelector('#name');
 
 name.textContent = data.name
 
-name.insertAdjacentHTML("beforeend", data.mainEmoji.character)
+const emojiContainer = document.querySelector('h1 span[role="img"]');
+emojiContainer.textContent = data.mainEmoji.character;
+emojiContainer.setAttribute('aria-label', data.mainEmoji.ariaLabel);
 
 const phoneNumberContainer = document.querySelector('#phone-number');
 phoneNumberContainer.textContent = data.phoneNumber;
 
 const emailContainer = document.querySelector('#email');
-emailContainer = document.querySelector()
 
