@@ -1,97 +1,135 @@
-const data = {
-  name: 'Alexis Matheus',
-  mainEmoji:{
-    character: '👋',
-    ariaLabel: 'wave',
-  },
-  phoneNumber: '7862024691',
-  email:'amatheus93@gmail.com',
-  githubHandle: 'amatheus000',
-  linkedInHandle: 'alexis-matheus',
-  
-  workExperiences: [{ emoji: "🍔",
-  jobTitle: "Operations Manager, R&D",
-  institution: "Burger King Corporate",
-  dates: "2019 - Present", // end with "present" for your current job
-  details: [
-    "Worked with franchisees and above restaurant leaders on execution of market test products",
-    "Assess restaurant complexity and develop strategies for restaurant simplification",
-    "Colaborate cross-functionally with different departments in order to accomplish project"
-  ]},
-  {  emoji: "🔌",
-  jobTitle: "Project Manager",
-  institution: "Nikola Power",
-  dates: "2018 - 2019", // end with "present" for your current job
-  details: [
-    "Conducted a market study on Electric Vehicles and charging stations infrastructure on the top 5 US states in the energy sector",
-    "Researched on policies, regulations and competitors regarding Electric Vehicles and charging stations",
-    "Analzed the collected data to identify and prioritize promising market opportunitie"]},
-  
-    {  emoji: "⚡",
-    jobTitle: "Mechanical Engineer ",
-    institution: "Deproex C.A.",
-    dates: "2017 - 2017", // end with "present" for your current job
-    details: [
-      "Designed the exhaust and fuel system for the generator. Analyzed the fluids mechanics and piping system with Epanet to guarantee engineering and safety standards",
-      "Designed the HVAC system of the Data Storage facilities. Conducted heat analysis, designed the piping system in CAD and selected the required equipment"]},
+function renderWorkExperience(workExperience) {
+  return `
+  <div>
+    <span class="date">${workExperience.dates}</span>
+    <h3>
+      <span role="img" aria-label="${workExperience.ariaLabel}">${
+    workExperience.emoji
+  }</span>
+      ${workExperience.jobTitle}<span class="comma">,</span>
+      <span class="light">${workExperience.institution}</span>
+    </h3>
+    <ul>
+      ${workExperience.details.map(detail => `<li>${detail}</li>`).join('')}
+    </ul>
+  </div>`;
+}
 
-      {  emoji: "⚙️",
-      jobTitle: "Mechanical Engineer Intern ",
-      institution: "Tractebel Engie",
-      dates: "2016 - 2016", // end with "present" for your current job
-      details: [
-        "Created an automatized dimensioning tool capable of recreating dam gates subject to hydrostatic and seismic loads",
-        "Validated the tool using ANSYS’ finite element analysis tested on previously developed gates"]},
+const renderEducationalExperience = educationalExperience => `
+  <div>
+    <span class="date">${educationalExperience.dates}</span>
+    <h3>
+      <span role="img" aria-label="${educationalExperience.ariaLabel}">${
+  educationalExperience.emoji
+}</span>
+      ${educationalExperience.university}<span class="comma">,</span>
+      <span class="light">${educationalExperience.school}</span>
+    </h3>
+    <ul>
+      ${educationalExperience.details
+        .map(detail => `<li>${detail}</li>`)
+        .join('')}
+    </ul>
+  </div>`;
 
-],  
-  educationalExperiences: [{
-    emoji: "🇺🇸",
-    university: "Duke University",
-    school: "Graduate Pratt School of Engineering",
-    dates: "2018 - 2018",
-    details: [
-      "Master in Engiinering Management",
-      "Member of the MEMP Energy Club"
-    ]
-  },
+function renderSkills(skill) {
+  return `
+  <div>
+    <span class="date">${skill.dates}</span>
+    <h3>
+      <span role="img" aria-label="${skill.ariaLabel}">${skill.emoji}</span>
+      ${skill.skillone}<span class="comma">,</span>
+      <span class="light">${skill.skilltwo}</span>
+    </h3>
+    <ul>
+    ${skill.details.map(detail => `<li>${detail}</li>`).join('')}
+    </ul>
+  </div>`;
+}
 
-  {
-    emoji: "🇻🇪",
-    university: "Universidad Simón Bolívar",
-    school: "Engineering School",
-    dates: "2011 - 2017",
-    details: [
-      "Mechanical Engineering Degree",
-      "General Secretary for the Mechanical Engineering Student Council",
-      "Group Leader in the design, construction and operation of an air compressor"
-    ]
-  },
+const fetchData = async () => {
+  const response = await fetch('./data.json');
 
-  {
-    emoji: "🇫🇷",
-    university: "UTC",
-    school: "Engineering School",
-    dates: "2015 - 2016",
-    details: [
-      "Exchange Student in Mechanical Engineering",
-      "Courses: Industrial reliability, Supply Chain, Major Technological risk study"
-    ]
-  }
-],
+  console.log(response)
+  console.log(response.body)
+
+  const data = await response.json();
+
+  document.title = data.name;
+
+console.log(data)
+
+  const name = document.querySelector('#name');
+  name.textContent = data.name;
+
+  const emojiContainer = document.querySelector('h1 span[role="img"]');
+  emojiContainer.textContent = data.mainEmoji.character;
+  emojiContainer.setAttribute('aria-label', data.mainEmoji.ariaLabel);
+
+  const phoneNumberContainer = document.querySelector('#phone-number');
+  phoneNumberContainer.textContent = data.phoneNumber;
+  const phoneLink = document.querySelector('li:nth-child(1) a');
+  phoneLink.href += data.phoneNumber;
+
+  const emailContainer = document.querySelector('#email');
+  emailContainer.textContent = data.email;
+  const emailLink = document.querySelector('li:nth-child(2) a');
+  emailLink.href += data.email;
+
+  const githubContainer = document.querySelector('#github-link');
+  githubContainer.textContent += data.githubHandle;
+  const githubLink = document.querySelector('li:nth-child(3) a');
+  githubLink.href += data.githubHandle;
+
+  const linkedInContainer = document.querySelector('#linkedin-link');
+  linkedInContainer.textContent += data.linkedInHandle;
+  const linkedInLink = document.querySelector('li:nth-child(4) a');
+  linkedInLink.href += data.linkedInHandle;
+
+  const workExperienceHeadingEmojiContainer = document.querySelector(
+    "h2:nth-of-type(1) span[role='img']"
+  );
+  workExperienceHeadingEmojiContainer.textContent =
+    data.headingEmojis.workExperience.character;
+  workExperienceHeadingEmojiContainer.setAttribute(
+    'aria-label',
+    data.headingEmojis.workExperience.ariaLabel
+  );
+  const educationalExperienceHeadingEmojiContainer = document.querySelector(
+    "h2:nth-of-type(2) span[role='img']"
+  );
+  educationalExperienceHeadingEmojiContainer.textContent =
+    data.headingEmojis.educationExperience.character;
+  educationalExperienceHeadingEmojiContainer.setAttribute(
+    'aria-label',
+    data.headingEmojis.educationExperience.ariaLabel
+  );
+  const skillsHeadingEmojiContainer = document.querySelector(
+    "h2:nth-of-type(3) span[role='img']"
+  );
+  skillsHeadingEmojiContainer.textContent = data.headingEmojis.skills.character;
+  skillsHeadingEmojiContainer.setAttribute(
+    'aria-label',
+    data.headingEmojis.skills.ariaLabel
+  );
+
+  const workExperienceContainer = document.querySelector('#work-experience');
+  const eachWorkExperienceHTML = data.workExperiences.map(renderWorkExperience);
+  const allWorkExperiencesHTML = eachWorkExperienceHTML.join('');
+  workExperienceContainer.innerHTML = allWorkExperiencesHTML;
+
+  const educationContainer = document.querySelector('#education');
+  const eachEducationalExperienceHTML = data.educationalExperiences.map(
+    renderEducationalExperience
+  );
+  const allEducationalExperiencesHTML = eachEducationalExperienceHTML.join('');
+  educationContainer.innerHTML = allEducationalExperiencesHTML;
+
+  const skillContainer = document.querySelector(`#skills`);
+  const eachSkillHTML = data.skills.map(renderSkills);
+  const allSkillsHTML = eachSkillHTML.join('');
+  skillContainer.innerHTML = allSkillsHTML;
 };
 
-document.title = data.name;
 
-const name = document.querySelector('#name');
-
-name.textContent = data.name
-
-const emojiContainer = document.querySelector('h1 span[role="img"]');
-emojiContainer.textContent = data.mainEmoji.character;
-emojiContainer.setAttribute('aria-label', data.mainEmoji.ariaLabel);
-
-const phoneNumberContainer = document.querySelector('#phone-number');
-phoneNumberContainer.textContent = data.phoneNumber;
-
-const emailContainer = document.querySelector('#email');
-
+fetchData()
